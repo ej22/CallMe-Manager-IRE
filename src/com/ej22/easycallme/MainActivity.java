@@ -74,6 +74,19 @@ public class MainActivity extends ActionBarActivity {
 				         Toast.LENGTH_LONG).show();
 				         e.printStackTrace();
 				      }
+				}//end if statement
+				else if(opChoice.equals("3")){
+					try {
+				         SmsManager smsManager = SmsManager.getDefault();
+				         smsManager.sendTextMessage(operator, null, "Call me "+ number, null, null);
+				         Toast.makeText(getApplicationContext(), "SMS sent.",
+				         Toast.LENGTH_LONG).show();
+				      } catch (Exception e) {
+				         Toast.makeText(getApplicationContext(),
+				         "SMS failed, please try again.",
+				         Toast.LENGTH_LONG).show();
+				         e.printStackTrace();
+				      }
 				}
 			}
         	
