@@ -1,10 +1,14 @@
 package com.ej22.easycallme;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -94,6 +98,16 @@ public class MainActivity extends ActionBarActivity {
 				         Toast.LENGTH_LONG).show();
 				         e.printStackTrace();
 				      }
+				}//end else if
+				else if(opChoice.equals("O2")){
+					try{
+						Intent callIntent = new Intent(Intent.ACTION_CALL);
+						callIntent.setData(Uri.parse(operator+number));
+						startActivity(callIntent);
+					}catch (ActivityNotFoundException e) {
+				        Log.e("Call Me", "Call failed", e);
+				    }
+					
 				}
 			}
         	
