@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
 	Spinner op;
 	int pos, selection;
 	String operator, number;
+	TextView test;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,12 @@ public class MainActivity extends ActionBarActivity {
         op = (Spinner)findViewById(R.id.operatorSpinner);
         btn = (Button)findViewById(R.id.button1);
         final String opNums[] = getResources().getStringArray(R.array.operatorNumbersIre);
+        test = (TextView)findViewById(R.id.testOP);
         
+        //TEST LABEL FOR GETTING NETWORK NAMES - TO BE REMOVED
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        test.setText(tm.getNetworkOperatorName());
+        //END REMOVE HERE
         
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.operatorChociesIre, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -73,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
 				operator = opNums[pos];
 				String opChoice = op.getSelectedItem().toString();
 				
-				if(opChoice.equals("Meteor") || opChoice.equals("Vodafone"))
+				if(opChoice.equals("Meteor") || opChoice.equals("vodafone IE"))
 				{
 					try {
 				         SmsManager smsManager = SmsManager.getDefault();
