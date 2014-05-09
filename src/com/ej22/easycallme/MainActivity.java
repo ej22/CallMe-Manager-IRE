@@ -1,8 +1,10 @@
 package com.ej22.easycallme;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
 	Button btn;
 	EditText num;
 	Spinner op;
-	int pos;
+	int pos, selection;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,15 @@ public class MainActivity extends ActionBarActivity {
         btn = (Button)findViewById(R.id.button1);
         final String opNums[] = getResources().getStringArray(R.array.operatorNumbersIre);
         
+        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.operatorChociesIre, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         op.setAdapter(adapter);
         
+        selection = adapter.getPosition(tm.getNetworkOperatorName());
+        
+        op.setSelection(selection);
         op.setOnItemSelectedListener(new OnItemSelectedListener(){
 
 			@Override
