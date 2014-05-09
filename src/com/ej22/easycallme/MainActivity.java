@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
         num = (EditText)findViewById(R.id.editText1);
         op = (Spinner)findViewById(R.id.operatorSpinner);
         btn = (Button)findViewById(R.id.button1);
-        String opNums[] = getResources().getStringArray(R.array.operatorNumbersIre);
+        final String opNums[] = getResources().getStringArray(R.array.operatorNumbersIre);
         
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.operatorChociesIre, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -60,18 +60,24 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String number = num.getText().toString();
+				String operator = opNums[pos];
 				
-				try {
-			         SmsManager smsManager = SmsManager.getDefault();
-			         smsManager.sendTextMessage(operator, null, number, null, null);
-			         Toast.makeText(getApplicationContext(), "SMS sent.",
-			         Toast.LENGTH_LONG).show();
-			      } catch (Exception e) {
-			         Toast.makeText(getApplicationContext(),
-			         "SMS failed, please try again.",
-			         Toast.LENGTH_LONG).show();
-			         e.printStackTrace();
-			      }
+				switch(opChoice){
+				case "Meteor":
+				case "Vodafone":
+					try {
+				         SmsManager smsManager = SmsManager.getDefault();
+				         smsManager.sendTextMessage(operator, null, number, null, null);
+				         Toast.makeText(getApplicationContext(), "SMS sent.",
+				         Toast.LENGTH_LONG).show();
+				      } catch (Exception e) {
+				         Toast.makeText(getApplicationContext(),
+				         "SMS failed, please try again.",
+				         Toast.LENGTH_LONG).show();
+				         e.printStackTrace();
+				      }
+					
+				}
 			}
         	
         });
