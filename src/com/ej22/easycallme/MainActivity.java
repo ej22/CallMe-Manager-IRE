@@ -62,9 +62,9 @@ public class MainActivity extends ActionBarActivity {
 				String number = num.getText().toString();
 				String operator = opNums[pos];
 				
-				switch(opChoice){
-				case "Meteor":
-				case "Vodafone":
+//				switch(opChoice){
+//				case "Meteor":
+//				case "Vodafone":
 					try {
 				         SmsManager smsManager = SmsManager.getDefault();
 				         smsManager.sendTextMessage(operator, null, number, null, null);
@@ -77,7 +77,7 @@ public class MainActivity extends ActionBarActivity {
 				         e.printStackTrace();
 				      }
 					
-				}
+//				}
 			}
         	
         });
