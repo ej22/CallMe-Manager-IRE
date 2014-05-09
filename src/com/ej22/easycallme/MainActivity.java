@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
 	EditText num;
 	Spinner op;
 	int pos, selection;
+	String operator, number;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,8 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String number = num.getText().toString();
-				String operator = opNums[pos];
+				number = num.getText().toString();
+				operator = opNums[pos];
 				String opChoice = op.getSelectedItem().toString();
 				
 				if(opChoice.equals("Meteor") || opChoice.equals("Vodafone"))
@@ -100,18 +101,21 @@ public class MainActivity extends ActionBarActivity {
 				      }
 				}//end else if
 				else if(opChoice.equals("O2")){
-					try{
-						Intent callIntent = new Intent(Intent.ACTION_CALL);
-						callIntent.setData(Uri.parse(operator+number));
-						startActivity(callIntent);
-					}catch (ActivityNotFoundException e) {
-				        Log.e("Call Me", "Call failed", e);
-				    }
-					
+					callO2();
 				}
 			}
         	
         });
+    }
+    
+    public void callO2(){
+    	try{
+			Intent callIntent = new Intent(Intent.ACTION_CALL);
+			callIntent.setData(Uri.parse("tel:"+operator+number));
+			startActivity(callIntent);
+		}catch (ActivityNotFoundException e) {
+	        Log.e("Call Me", "Call failed", e);
+	    }
     }
 
 
