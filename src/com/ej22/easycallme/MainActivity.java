@@ -20,7 +20,6 @@ public class MainActivity extends ActionBarActivity {
 	Button btn;
 	EditText num;
 	Spinner op;
-	String opChoice;
 	int pos;
 	
     @Override
@@ -43,7 +42,6 @@ public class MainActivity extends ActionBarActivity {
 			public void onItemSelected(AdapterView<?> adapter, View arg1,
 					int position, long arg3) {
 				// TODO Auto-generated method stub
-				opChoice = adapter.getItemAtPosition(pos).toString();
 				pos = position;
 			}
 
@@ -61,10 +59,10 @@ public class MainActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				String number = num.getText().toString();
 				String operator = opNums[pos];
+				String opChoice = op.getSelectedItem().toString();
 				
-//				switch(opChoice){
-//				case "Meteor":
-//				case "Vodafone":
+				if(opChoice.equals("Meteor") || opChoice.equals("Vodafone"))
+				{
 					try {
 				         SmsManager smsManager = SmsManager.getDefault();
 				         smsManager.sendTextMessage(operator, null, number, null, null);
@@ -76,8 +74,7 @@ public class MainActivity extends ActionBarActivity {
 				         Toast.LENGTH_LONG).show();
 				         e.printStackTrace();
 				      }
-					
-//				}
+				}
 			}
         	
         });
