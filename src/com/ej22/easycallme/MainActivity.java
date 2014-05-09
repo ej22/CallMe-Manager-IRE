@@ -7,14 +7,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
 	Button btn;
-	EditText num, op;
+	EditText num;
+	Spinner op;
+	String opChoice;
+	int pos;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +29,30 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         
         num = (EditText)findViewById(R.id.editText1);
-        op = (EditText)findViewById(R.id.editText2);
+        op = (Spinner)findViewById(R.id.operatorSpinner);
         btn = (Button)findViewById(R.id.button1);
+        String opNums[] = getResources().getStringArray(R.array.operatorNumbersIre);
+        
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.operatorChociesIre, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        op.setAdapter(adapter);
+        
+        op.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> adapter, View arg1,
+					int position, long arg3) {
+				// TODO Auto-generated method stub
+				opChoice = adapter.getItemAtPosition(pos).toString();
+				pos = position;
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
+        });
         
         btn.setOnClickListener(new OnClickListener(){
 
@@ -31,7 +60,6 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String number = num.getText().toString();
-				String operator = op.getText().toString();
 				
 				try {
 			         SmsManager smsManager = SmsManager.getDefault();
