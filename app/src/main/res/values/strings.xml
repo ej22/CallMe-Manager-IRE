@@ -6,6 +6,9 @@
     <string name="action_settings">Settings</string>
     <string name="phone_num">Phone Number:</string>
     <string name="operator">Select Operator:</string>
+    <string name="send">Send</string>
+    <string name="complete">Call me sent</string>
+    <string name="error">Sending Failed</string>
     
     <string-array name="operatorChociesIre">
         <item>3</item>

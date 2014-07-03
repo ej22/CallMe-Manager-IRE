@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
+
 public class MainActivity extends ActionBarActivity {
 
 	Button btn;
@@ -30,17 +32,20 @@ public class MainActivity extends ActionBarActivity {
 	int pos, selection;
 	String operator, number;
 	TextView test;
+    CircularProgressButton cpBtn;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        num = (EditText)findViewById(R.id.editText1);
+        num = (EditText)findViewById(R.id.phoneNumEditTxt);
         op = (Spinner)findViewById(R.id.operatorSpinner);
-        btn = (Button)findViewById(R.id.button1);
+        btn = (Button)findViewById(R.id.sendBtn);
         final String opNums[] = getResources().getStringArray(R.array.operatorNumbersIre);
         test = (TextView)findViewById(R.id.testOP);
+        cpBtn = (CircularProgressButton)findViewById(R.id.btnWithText);
+        cpBtn.setProgress(0);
         
         //TEST LABEL FOR GETTING NETWORK NAMES - TO BE REMOVED
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -70,10 +75,12 @@ public class MainActivity extends ActionBarActivity {
         	
         });
         
-        btn.setOnClickListener(new OnClickListener(){
+        cpBtn.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
+                cpBtn.setIndeterminateProgressMode(true);
+                cpBtn.setProgress(50);
 				// TODO Auto-generated method stub
 				number = num.getText().toString();
 				operator = opNums[pos];
@@ -84,12 +91,14 @@ public class MainActivity extends ActionBarActivity {
 					try {
 				         SmsManager smsManager = SmsManager.getDefault();
 				         smsManager.sendTextMessage(operator, null, number, null, null);
+                        cpBtn.setProgress(100);
 				         Toast.makeText(getApplicationContext(), "SMS sent.",
 				         Toast.LENGTH_LONG).show();
 				      } catch (Exception e) {
-				         Toast.makeText(getApplicationContext(),
+                        cpBtn.setProgress(-1);
+				         /*Toast.makeText(getApplicationContext(),
 				         "SMS failed, please try again.",
-				         Toast.LENGTH_LONG).show();
+				         Toast.LENGTH_LONG).show();*/
 				         e.printStackTrace();
 				      }
 				}//end if statement
@@ -97,12 +106,14 @@ public class MainActivity extends ActionBarActivity {
 					try {
 				         SmsManager smsManager = SmsManager.getDefault();
 				         smsManager.sendTextMessage(operator, null, "Call me "+ number, null, null);
-				         Toast.makeText(getApplicationContext(), "SMS sent.",
-				         Toast.LENGTH_LONG).show();
+                        cpBtn.setProgress(100);
+				         //Toast.makeText(getApplicationContext(), "SMS sent.",
+				         //Toast.LENGTH_LONG).show();
 				      } catch (Exception e) {
-				         Toast.makeText(getApplicationContext(),
-				         "SMS failed, please try again.",
-				         Toast.LENGTH_LONG).show();
+                        cpBtn.setProgress(-1);
+				         /*Toast.makeText(getApplicationContext(),
+				         *"SMS failed, please try again.",
+				         Toast.LENGTH_LONG).show();*/
 				         e.printStackTrace();
 				      }
 				}//end else if
