@@ -1,5 +1,6 @@
 package com.ej22.easycallme;
 
+import android.animation.ValueAnimator;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -20,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dd.CircularProgressButton;
 
@@ -41,11 +42,9 @@ public class MainActivity extends ActionBarActivity {
         
         num = (EditText)findViewById(R.id.phoneNumEditTxt);
         op = (Spinner)findViewById(R.id.operatorSpinner);
-        btn = (Button)findViewById(R.id.sendBtn);
         final String opNums[] = getResources().getStringArray(R.array.operatorNumbersIre);
         test = (TextView)findViewById(R.id.testOP);
         cpBtn = (CircularProgressButton)findViewById(R.id.btnWithText);
-        cpBtn.setProgress(0);
         
         //TEST LABEL FOR GETTING NETWORK NAMES - TO BE REMOVED
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -74,31 +73,29 @@ public class MainActivity extends ActionBarActivity {
 			}
         	
         });
-        
+
         cpBtn.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-                cpBtn.setIndeterminateProgressMode(true);
-                cpBtn.setProgress(50);
 				// TODO Auto-generated method stub
 				number = num.getText().toString();
 				operator = opNums[pos];
 				String opChoice = op.getSelectedItem().toString();
-				
+
 				if(opChoice.equals("Meteor") || opChoice.equals("vodafone IE"))
 				{
 					try {
 				         SmsManager smsManager = SmsManager.getDefault();
 				         smsManager.sendTextMessage(operator, null, number, null, null);
-                        cpBtn.setProgress(100);
-				         Toast.makeText(getApplicationContext(), "SMS sent.",
-				         Toast.LENGTH_LONG).show();
+
+                        if (cpBtn.getProgress() == 0) {
+                            successAnimation(cpBtn);
+                        } else {
+                            cpBtn.setProgress(0);
+                        }
 				      } catch (Exception e) {
                         cpBtn.setProgress(-1);
-				         /*Toast.makeText(getApplicationContext(),
-				         "SMS failed, please try again.",
-				         Toast.LENGTH_LONG).show();*/
 				         e.printStackTrace();
 				      }
 				}//end if statement
@@ -107,13 +104,8 @@ public class MainActivity extends ActionBarActivity {
 				         SmsManager smsManager = SmsManager.getDefault();
 				         smsManager.sendTextMessage(operator, null, "Call me "+ number, null, null);
                         cpBtn.setProgress(100);
-				         //Toast.makeText(getApplicationContext(), "SMS sent.",
-				         //Toast.LENGTH_LONG).show();
 				      } catch (Exception e) {
                         cpBtn.setProgress(-1);
-				         /*Toast.makeText(getApplicationContext(),
-				         *"SMS failed, please try again.",
-				         Toast.LENGTH_LONG).show();*/
 				         e.printStackTrace();
 				      }
 				}//end else if
@@ -133,6 +125,21 @@ public class MainActivity extends ActionBarActivity {
 		}catch (ActivityNotFoundException e) {
 	        Log.e("Call Me", "Call failed", e);
 	    }
+    }
+
+    //Code gotten from sample of CircularProgressButton project on Github.
+    private void successAnimation(final CircularProgressButton button) {
+        ValueAnimator widthAnimation = ValueAnimator.ofInt(1, 100);
+        widthAnimation.setDuration(1500);
+        widthAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+        widthAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Integer value = (Integer) animation.getAnimatedValue();
+                button.setProgress(value);
+            }
+        });
+        widthAnimation.start();
     }
 
 

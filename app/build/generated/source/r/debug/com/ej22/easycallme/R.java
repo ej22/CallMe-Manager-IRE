@@ -1050,11 +1050,11 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f080015;
         public static final int action_menu_presenter=0x7f080016;
         public static final int action_mode_close_button=0x7f080024;
-        public static final int action_settings=0x7f080043;
+        public static final int action_settings=0x7f080042;
         public static final int activity_chooser_view_content=0x7f080025;
         public static final int always=0x7f08000f;
         public static final int beginning=0x7f08000a;
-        public static final int btnWithText=0x7f080042;
+        public static final int btnWithText=0x7f080041;
         public static final int checkbox=0x7f08002d;
         public static final int collapseActionView=0x7f080011;
         public static final int default_activity_button=0x7f080028;
@@ -1077,7 +1077,7 @@ containing a value of this type.
         public static final int none=0x7f080009;
         public static final int normal=0x7f080000;
         public static final int opLbl=0x7f08003e;
-        public static final int operatorSpinner=0x7f080040;
+        public static final int operatorSpinner=0x7f08003f;
         public static final int phoneNumEditTxt=0x7f08003d;
         public static final int phoneNumLbl=0x7f08003c;
         public static final int progress_circular=0x7f080018;
@@ -1093,7 +1093,6 @@ containing a value of this type.
         public static final int search_plate=0x7f080036;
         public static final int search_src_text=0x7f080037;
         public static final int search_voice_btn=0x7f08003b;
-        public static final int sendBtn=0x7f08003f;
         public static final int shortcut=0x7f08002e;
         public static final int showCustom=0x7f080007;
         public static final int showHome=0x7f080004;
@@ -1101,7 +1100,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f08001e;
         public static final int submit_area=0x7f080039;
         public static final int tabMode=0x7f080002;
-        public static final int testOP=0x7f080041;
+        public static final int testOP=0x7f080040;
         public static final int title=0x7f08002b;
         public static final int top_action_bar=0x7f080020;
         public static final int up=0x7f080021;

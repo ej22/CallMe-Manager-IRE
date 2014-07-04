@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:focusableInTouchMode="false"
     tools:context="com.ej22.easycallme.MainActivity$PlaceholderFragment" >
 
     <TextView
@@ -35,14 +36,6 @@
         android:layout_marginTop="38dp"
         android:text="@string/operator" />
 
-    <Button
-        android:id="@+id/sendBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Send" />
-
     <Spinner
         android:id="@+id/operatorSpinner"
         android:layout_width="wrap_content"
@@ -54,10 +47,11 @@
         android:id="@+id/testOP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/sendBtn"
-        android:layout_below="@+id/sendBtn"
-        android:layout_marginTop="61dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_below="@+id/operatorSpinner"
+        android:layout_toRightOf="@+id/btnWithText"
+        android:layout_marginTop="95dp"
+        android:layout_alignParentEnd="false" />
 
     <com.dd.CircularProgressButton
         xmlns:app="http://schemas.android.com/apk/res/com.ej22.easycallme"
@@ -69,6 +63,7 @@
         app:textComplete="@string/complete"
         app:textError="@string/error"
         app:textIdle="@string/send"
+        app:cornerRadius="48dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
