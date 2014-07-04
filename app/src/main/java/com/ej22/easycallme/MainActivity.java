@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -42,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
         
         num = (EditText)findViewById(R.id.phoneNumEditTxt);
         op = (Spinner)findViewById(R.id.operatorSpinner);
-        final String opNums[] = getResources().getStringArray(R.array.operatorNumbersIre);
+        final String opNumbers[] = getResources().getStringArray(R.array.operatorNumbersIre);
         test = (TextView)findViewById(R.id.testOP);
         cpBtn = (CircularProgressButton)findViewById(R.id.btnWithText);
         
@@ -56,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
         op.setAdapter(adapter);
         
         selection = adapter.getPosition(tm.getNetworkOperatorName());
-        
+
         op.setSelection(selection);
         op.setOnItemSelectedListener(new OnItemSelectedListener(){
 
@@ -80,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				number = num.getText().toString();
-				operator = opNums[pos];
+				operator = opNumbers[pos];
 				String opChoice = op.getSelectedItem().toString();
 
 				if(opChoice.equals("Meteor") || opChoice.equals("vodafone IE"))
@@ -94,6 +96,14 @@ public class MainActivity extends ActionBarActivity {
                         } else {
                             cpBtn.setProgress(0);
                         }
+
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                cpBtn.setProgress(0);
+                            }
+                        }, 3500);
 				      } catch (Exception e) {
                         cpBtn.setProgress(-1);
 				         e.printStackTrace();
