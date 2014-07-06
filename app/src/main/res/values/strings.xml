@@ -9,7 +9,7 @@
     <string name="send">Send</string>
     <string name="complete">Call me sent</string>
     <string name="error">Sending Failed</string>
-    
+
     <string-array name="operatorChociesIre">
         <item>3</item>
         <item>Meteor</item>
@@ -21,6 +21,7 @@
         <item>50100</item>
         <item>50001</item>
         <item>*103*</item>
-        <item>50234</item>        
+        <item>50234</item>
     </string-array>
+
 </resources>
