@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CallMeApp.iml" filepath="$PROJECT_DIR$/CallMeApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CallMe-Manager-IRE.iml" filepath="$PROJECT_DIR$/CallMe-Manager-IRE.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
-
